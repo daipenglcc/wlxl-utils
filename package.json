@@ -3,7 +3,6 @@
 	"version": "1.0.5",
 	"description": "前端常用函数封装",
 	"author": "youhuabujianye",
-	"license": "MIT",
 	"main": "dist/wlxl-utils.cjs.js",
 	"module": "dist/wlxl-utils.esm.js",
 	"browser": "dist/wlxl-utils.umd.js",
