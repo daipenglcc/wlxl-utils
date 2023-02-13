@@ -15,20 +15,18 @@ function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 /**
- * 生成uuid
- * @returns string 类型 df2367fb-1d9d-4bc5-8bbc-55a1166a2e5d
+ * @description: 随机生成字母数字组成的字符
+ * @param {number} min
+ * @param {number} max
+ * @return {*}
  */
-function uuid() {
-    var s = [];
-    var hexDigits = '0123456789abcdef';
-    for (var i = 0; i < 36; i++) {
-        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+function randomWord(min, max) {
+    var returnStr = '', range = max ? Math.round(Math.random() * (max - min)) + min : min, charStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < range; i++) {
+        var index = Math.round(Math.random() * (charStr.length - 1));
+        returnStr += charStr.substring(index, index + 1);
     }
-    s[14] = '4';
-    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);
-    s[8] = s[13] = s[18] = s[23] = '-';
-    var uuid = s.join('');
-    return uuid;
+    return returnStr;
 }
 
 /**
@@ -275,6 +273,264 @@ function isNumber(input) {
 }
 
 /**
+ * @description: 公司规模
+ * @return {*}
+ */
+var firmSize = [
+    { label: '0-49人', value: 1 },
+    { label: '50-99人', value: 2 },
+    { label: '100-499人', value: 3 },
+    { label: '500-999人', value: 4 },
+    { label: '1000-4999人', value: 5 },
+    { label: '5000人以上', value: 6 }
+];
+/**
+ * @description: 所属行业
+ * @return {*}
+ */
+var industry = [
+    { label: '零售', value: 1 },
+    { label: '制造业', value: 11 },
+    { label: '媒体', value: 2 },
+    { label: '教育', value: 3 },
+    { label: '金融', value: 4 },
+    { label: '医疗', value: 5 },
+    { label: '互联网', value: 6 },
+    { label: '生活服务', value: 7 },
+    { label: '人力资源', value: 8 },
+    { label: '仓储物流', value: 9 },
+    { label: '电子商务', value: 10 }
+];
+/**
+ * @description: 公司性质
+ * @return {*}
+ */
+var firmProperty = [
+    { label: '私营公司', value: 1 },
+    { label: '合资公司', value: 2 },
+    { label: '外资公司', value: 3 },
+    { label: '国有公司', value: 4 },
+    { label: '国有控股公司', value: 5 }
+];
+/**
+ * @description: 公司状态
+ * @return {*}
+ */
+var companyStatus = [
+    { label: '停用', value: 0 },
+    { label: '启用', value: 1 }
+];
+/**
+ * @description: 投放职位状态
+ * @return {*}
+ */
+var jobStatus = [
+    { label: '停用', value: 0 },
+    { label: '启用', value: 1 }
+];
+/**
+ * @description: 学历
+ * @return {*}
+ */
+var dDegree = [
+    {
+        code: 0,
+        value: '不限'
+    },
+    {
+        code: 9,
+        value: '初中'
+    },
+    {
+        code: 7,
+        value: '高中'
+    },
+    {
+        code: 13,
+        value: '中技'
+    },
+    {
+        code: 12,
+        value: '中专'
+    },
+    {
+        code: 5,
+        value: '大专'
+    },
+    {
+        code: 4,
+        value: '本科'
+    },
+    {
+        code: 3,
+        value: '硕士'
+    },
+    {
+        code: 10,
+        value: 'MBA'
+    },
+    {
+        code: 11,
+        value: 'EMBA'
+    },
+    {
+        code: 1,
+        value: '博士'
+    },
+    {
+        code: 8,
+        value: '其他'
+    }
+];
+/**
+ * @description: 工作经验
+ * @return {*}
+ */
+var dExpe = [
+    {
+        code: -1,
+        value: '不限'
+    },
+    {
+        code: 100,
+        value: '无经验'
+    },
+    {
+        code: 1,
+        value: '1年'
+    },
+    {
+        code: 2,
+        value: '2年'
+    },
+    {
+        code: 3,
+        value: '3年'
+    },
+    {
+        code: 4,
+        value: '4年'
+    },
+    {
+        code: 5,
+        value: '5年'
+    },
+    {
+        code: 6,
+        value: '6年'
+    },
+    {
+        code: 7,
+        value: '7年'
+    },
+    {
+        code: 8,
+        value: '8年'
+    },
+    {
+        code: 9,
+        value: '9年'
+    },
+    {
+        code: 10,
+        value: '10年'
+    }
+];
+/**
+ * @description: 性别
+ * @return {*}
+ */
+var dGender = [
+    {
+        code: 0,
+        value: ''
+    },
+    {
+        code: -1,
+        value: '不限'
+    },
+    {
+        code: 1,
+        value: '男'
+    },
+    {
+        code: 2,
+        value: '女'
+    }
+];
+/**
+ * @description: 工作职类
+ * @return {*}
+ */
+var stanDardData = [
+    { code: -1, value: '不限' },
+    { code: 1, value: '销售' },
+    { code: 2, value: '客服' },
+    { code: 3, value: '行政' },
+    { code: 4, value: '人事' },
+    { code: 5, value: '财务' },
+    { code: 6, value: '审核' },
+    { code: 7, value: '运营' },
+    { code: 8, value: '店员' },
+    { code: 11, value: '其他' },
+    { code: 12, value: '教育' },
+    { code: 13, value: '文员' },
+    { code: 14, value: '仓储物流' },
+    { code: 15, value: '城市经理' },
+    { code: 16, value: 'IT' }
+];
+/**
+ * @description: 招聘类型
+ * @return {*}
+ */
+var jobType = [
+    {
+        code: 0,
+        value: '招聘'
+    },
+    {
+        code: 1,
+        value: '外包'
+    }
+];
+/**
+ * @description: 工作性质
+ * @return {*}
+ */
+var jobNature = [
+    {
+        code: -1,
+        value: '不限'
+    },
+    {
+        code: 0,
+        value: '全职'
+    },
+    {
+        code: 1,
+        value: '兼职'
+    },
+    {
+        code: 2,
+        value: '实习'
+    }
+];
+/**
+ * @description: 沟通结果 - 评价页面相关字段显示逻辑
+ * @return {*}
+ */
+var gtResults = [
+    { code: 6, value: '接受邀约' },
+    { code: 5, value: '待确认' },
+    { code: 4, value: '不考虑' },
+    { code: 3, value: '岗位不符' },
+    { code: 2, value: '已找到工作' },
+    { code: 8, value: '未接通' },
+    { code: 1, value: '空号' },
+    { code: 7, value: '其他' } //显示沟通职位、顾问评价
+];
+
+/**
  * location url相关工具函数
  */
 /**
@@ -391,21 +647,33 @@ function removeSession(name) {
     window.sessionStorage.removeItem(name);
 }
 
+exports.companyStatus = companyStatus;
+exports.dDegree = dDegree;
+exports.dExpe = dExpe;
+exports.dGender = dGender;
+exports.firmProperty = firmProperty;
+exports.firmSize = firmSize;
 exports.format = format;
 exports.getLocal = getLocal;
 exports.getSession = getSession;
 exports.getTimestamp = getTimestamp;
 exports.getUrlVal = getUrlVal;
+exports.gtResults = gtResults;
+exports.industry = industry;
 exports.isArray = isArray;
 exports.isEmpty = isEmpty;
 exports.isNumber = isNumber;
+exports.jobNature = jobNature;
+exports.jobStatus = jobStatus;
+exports.jobType = jobType;
 exports.makeChNumber = makeChNumber;
 exports.makeChTime = makeChTime;
 exports.makeDuration = makeDuration;
 exports.parseUrlValToJson = parseUrlValToJson;
 exports.random = random;
+exports.randomWord = randomWord;
 exports.removeLocal = removeLocal;
 exports.removeSession = removeSession;
 exports.setLocal = setLocal;
 exports.setSession = setSession;
-exports.uuid = uuid;
+exports.stanDardData = stanDardData;
