@@ -1,6 +1,6 @@
 {
 	"name": "wlxl-utils",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "前端常用函数封装",
 	"author": "youhuabujianye",
 	"main": "dist/wlxl-utils.cjs.js",

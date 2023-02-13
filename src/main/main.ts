@@ -13,18 +13,19 @@ export function random(min: number, max: number): number {
 }
 
 /**
- * 生成uuid
- * @returns string 类型 df2367fb-1d9d-4bc5-8bbc-55a1166a2e5d
+ * @description: 随机生成字母数字组成的字符
+ * @param {number} min
+ * @param {number} max
+ * @return {*}
  */
-export function uuid(): string {
-  const s: any[] = []
-  const hexDigits = '0123456789abcdef'
-  for (let i = 0; i < 36; i++) {
-    s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1)
+export function randomWord(min: number, max: number): string {
+  var returnStr = '',
+    range = max ? Math.round(Math.random() * (max - min)) + min : min,
+    charStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+  for (var i = 0; i < range; i++) {
+    var index = Math.round(Math.random() * (charStr.length - 1))
+    returnStr += charStr.substring(index, index + 1)
   }
-  s[14] = '4'
-  s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1)
-  s[8] = s[13] = s[18] = s[23] = '-'
-  const uuid = s.join('')
-  return uuid
+  return returnStr
 }
